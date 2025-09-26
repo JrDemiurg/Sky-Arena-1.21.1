@@ -8,6 +8,12 @@
   "block.skyarena.gold_trophy": "§6Gold Trophy",
   "block.skyarena.diamond_trophy": "§6Diamond Trophy",
 
+  "skyarena.configuration.wikiLink": "Config wiki link",
+  "skyarena.configuration.requireEmptyChest": "Require empty chest",
+  "skyarena.configuration.enableLossMessageLeave": "Defeat message on leaving arena",
+  "skyarena.configuration.enableLossMessageDeath": "Defeat message on death",
+  "skyarena.configuration.enableUnclaimedRewardMessage": "Show “unclaimed reward” hint",
+
   "item.skyarena.forest_key": "§bForest Key",
   "item.skyarena.crimson_key": "§bCrimson Key",
   "item.skyarena.desert_key": "§bDesert Key",

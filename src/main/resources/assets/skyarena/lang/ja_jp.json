@@ -8,6 +8,12 @@
   "block.skyarena.gold_trophy": "§6金のトロフィー",
   "block.skyarena.diamond_trophy": "§6ダイヤモンドのトロフィー",
 
+  "skyarena.configuration.wikiLink": "設定ウィキへのリンク",
+  "skyarena.configuration.requireEmptyChest": "空のチェストが必要",
+  "skyarena.configuration.enableLossMessageLeave": "アリーナ退出時に敗北メッセージを表示",
+  "skyarena.configuration.enableLossMessageDeath": "死亡時に敗北メッセージを表示",
+  "skyarena.configuration.enableUnclaimedRewardMessage": "「未取得の報酬」のヒントを表示",
+
   "item.skyarena.forest_key": "§b森の鍵",
   "item.skyarena.crimson_key": "§b深紅の鍵",
   "item.skyarena.desert_key": "§b砂漠の鍵",

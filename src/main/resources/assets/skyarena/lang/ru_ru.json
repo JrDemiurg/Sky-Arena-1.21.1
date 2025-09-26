@@ -8,6 +8,12 @@
   "block.skyarena.gold_trophy": "§6Золотой трофей",
   "block.skyarena.diamond_trophy": "§6Алмазный трофей",
 
+  "skyarena.configuration.wikiLink": "Ссылка на вики по конфигу",
+  "skyarena.configuration.requireEmptyChest": "Требовать пустой сундук",
+  "skyarena.configuration.enableLossMessageLeave": "Сообщение о поражении при выходе с арены",
+  "skyarena.configuration.enableLossMessageDeath": "Сообщение о поражении при смерти",
+  "skyarena.configuration.enableUnclaimedRewardMessage": "Показывать подсказку «не забрана награда»",
+
   "item.skyarena.forest_key": "§bЛесной ключ",
   "item.skyarena.crimson_key": "§bБагряный ключ",
   "item.skyarena.desert_key": "§bПустынный ключ",

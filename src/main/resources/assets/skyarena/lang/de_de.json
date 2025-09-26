@@ -8,6 +8,12 @@
   "block.skyarena.gold_trophy": "§6Goldtrophäe",
   "block.skyarena.diamond_trophy": "§6Diamanttrophäe",
 
+  "skyarena.configuration.wikiLink": "Konfigurations-Wiki-Link",
+  "skyarena.configuration.requireEmptyChest": "Leere Truhe erforderlich",
+  "skyarena.configuration.enableLossMessageLeave": "Niederlagenmeldung beim Verlassen der Arena",
+  "skyarena.configuration.enableLossMessageDeath": "Niederlagenmeldung beim Tod",
+  "skyarena.configuration.enableUnclaimedRewardMessage": "Hinweis „Nicht beanspruchte Belohnung“ anzeigen",
+
   "item.skyarena.forest_key": "§bWaldschlüssel",
   "item.skyarena.crimson_key": "§bKarmesinschlüssel",
   "item.skyarena.desert_key": "§bWüstenschlüssel",
