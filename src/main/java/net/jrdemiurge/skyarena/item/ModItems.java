@@ -2,6 +2,7 @@ package net.jrdemiurge.skyarena.item;
 
 import net.jrdemiurge.skyarena.SkyArena;
 import net.jrdemiurge.skyarena.item.custom.DungeonEyeItem;
+import net.jrdemiurge.skyarena.item.custom.MobAnalyzerItem;
 import net.jrdemiurge.skyarena.util.ModTags;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
@@ -33,7 +34,7 @@ public class ModItems {
             () -> new DungeonEyeItem(new Item.Properties(), ModTags.EYE_OF_ICE_LOCATED));
 
     public static final DeferredItem<Item> MOB_ANALYZER = ITEMS.register("mob_analyzer",
-            () -> new Item(new Item.Properties().stacksTo(1)));
+            () -> new MobAnalyzerItem(new Item.Properties().stacksTo(1)));
 
     public static void register (IEventBus eventBus) {
         ITEMS.register(eventBus);

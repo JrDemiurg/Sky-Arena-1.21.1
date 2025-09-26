@@ -1,7 +1,6 @@
 package net.jrdemiurge.skyarena.item.custom;
 
 import net.jrdemiurge.skyarena.mixin.EyeOfEnderAccessor;
-import net.jrdemiurge.skyarena.util.ModTags;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -28,7 +27,7 @@ public class DungeonEyeItem extends Item {
         Structure = structure;
     }
 
-    // можно переделать как в катаклизме чтобы всегда выживал но не тратился и с кд в 60 тиков
+    // можно переделать как в катаклизме чтобы всегда выживал, но не тратился и с кд в 60 тиков
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         if (level instanceof ServerLevel serverlevel) {
