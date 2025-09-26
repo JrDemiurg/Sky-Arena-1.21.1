@@ -1,5 +1,8 @@
 package net.jrdemiurge.skyarena;
 
+import net.jrdemiurge.skyarena.block.ModBlocks;
+import net.jrdemiurge.skyarena.item.ModCreativeModeTabs;
+import net.jrdemiurge.skyarena.item.ModItems;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -22,6 +25,10 @@ public class SkyArena {
         modEventBus.addListener(this::commonSetup);
 
         NeoForge.EVENT_BUS.register(this);
+
+        ModCreativeModeTabs.register(modEventBus);
+        ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
