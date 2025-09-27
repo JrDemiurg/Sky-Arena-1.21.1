@@ -1,6 +1,7 @@
 package net.jrdemiurge.skyarena.block;
 
 import net.jrdemiurge.skyarena.SkyArena;
+import net.jrdemiurge.skyarena.block.custom.TrophyBlock;
 import net.jrdemiurge.skyarena.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -31,38 +32,38 @@ public class ModBlocks {
             ));
 
     public static final DeferredBlock<Block> OAK_TROPHY = registerBlock("oak_trophy",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)
+            () -> new TrophyBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)
                     .noOcclusion().
                     lightLevel((state) -> 5)
             ));
 
     public static final DeferredBlock<Block> STONE_TROPHY = registerBlock("stone_trophy",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+            () -> new TrophyBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
                     .noOcclusion().
                     lightLevel((state) -> 5)
             ));
 
     public static final DeferredBlock<Block> IRON_TROPHY = registerBlock("iron_trophy",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+            () -> new TrophyBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
                     .noOcclusion().
                     lightLevel((state) -> 5)
             ));
 
     public static final DeferredBlock<Block> GOLD_TROPHY = registerBlock("gold_trophy",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GOLD_BLOCK)
+            () -> new TrophyBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GOLD_BLOCK)
                     .noOcclusion().
                     lightLevel((state) -> 5)
             ));
 
 
     public static final DeferredBlock<Block> DIAMOND_TROPHY = registerBlock("diamond_trophy",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK)
+            () -> new TrophyBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK)
                     .noOcclusion().
                     lightLevel((state) -> 5)
             ));
 
     public static final DeferredBlock<Block> NETHERITE_TROPHY = registerBlock("netherite_trophy",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERITE_BLOCK)
+            () -> new TrophyBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERITE_BLOCK)
                     .noOcclusion().
                     lightLevel((state) -> 5)
             ));
