@@ -1,8 +1,10 @@
 package net.jrdemiurge.skyarena;
 
 import net.jrdemiurge.skyarena.block.ModBlocks;
+import net.jrdemiurge.skyarena.block.entity.ModBlockEntities;
 import net.jrdemiurge.skyarena.item.ModCreativeModeTabs;
 import net.jrdemiurge.skyarena.item.ModItems;
+import net.jrdemiurge.skyarena.triggers.ModTriggers;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -29,6 +31,8 @@ public class SkyArena {
         ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
+        ModTriggers.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }

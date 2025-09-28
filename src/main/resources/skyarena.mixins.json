@@ -8,6 +8,9 @@
     "defaultRequire": 1
   },
   "mixins": [
-    "EyeOfEnderAccessor"
+    "EyeOfEnderAccessor",
+    "LevelMixin",
+    "ServerBossEventMixin",
+    "WitherBossMixin"
   ]
 }

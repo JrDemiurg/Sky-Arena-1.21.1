@@ -1,6 +1,8 @@
 package net.jrdemiurge.skyarena.block;
 
 import net.jrdemiurge.skyarena.SkyArena;
+import net.jrdemiurge.skyarena.block.custom.AltarBlock;
+import net.jrdemiurge.skyarena.block.custom.AltarBlockTop;
 import net.jrdemiurge.skyarena.block.custom.TrophyBlock;
 import net.jrdemiurge.skyarena.item.ModItems;
 import net.minecraft.world.item.BlockItem;
@@ -18,14 +20,14 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(SkyArena.MOD_ID);
 
     public static final DeferredBlock<Block> ALTAR_BATTLE = registerBlock("altar_battle",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+            () -> new AltarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
                     .noOcclusion()
                     .lightLevel((state) -> 5)
                     .strength(-1.0F, 3600000.0F)
             ));
 
     public static final DeferredBlock<Block> ALTAR_BATTLE_TOP = registerBlock("altar_battle_top",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+            () -> new AltarBlockTop(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
                     .noOcclusion()
                     .lightLevel((state) -> 5)
                     .strength(-1.0F, 3600000.0F)
