@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-// TODO проверить работу
 @EventBusSubscriber(modid = SkyArena.MOD_ID)
 public class Scheduler {
     private static final List<SchedulerTask> tasks = new ArrayList<>();

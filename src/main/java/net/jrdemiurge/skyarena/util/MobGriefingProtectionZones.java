@@ -7,7 +7,6 @@ import net.minecraft.world.level.Level;
 import java.util.HashMap;
 import java.util.Map;
 
-// TODO проверить работу
 public class MobGriefingProtectionZones {
 
     private static final Map<ResourceKey<Level>, Map<BlockPos, Integer>> MOB_GRIEFING_PROTECTION_ZONES = new HashMap<>();

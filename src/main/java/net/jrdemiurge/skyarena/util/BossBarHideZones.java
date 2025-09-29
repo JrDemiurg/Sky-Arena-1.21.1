@@ -7,7 +7,6 @@ import net.minecraft.world.level.Level;
 import java.util.HashMap;
 import java.util.Map;
 
-// TODO проверить работу
 public class BossBarHideZones {
 
     private static final Map<ResourceKey<Level>, Map<BlockPos, Integer>> BOSS_BAR_HIDE_ZONES = new HashMap<>();

@@ -12,7 +12,6 @@ import net.neoforged.neoforge.event.entity.EntityMobGriefingEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDestroyBlockEvent;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
 
-// TODO проверить работу
 @EventBusSubscriber(modid = SkyArena.MOD_ID)
 public class MobGriefingHandler {
 

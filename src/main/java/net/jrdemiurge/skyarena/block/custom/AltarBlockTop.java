@@ -41,7 +41,6 @@ public class AltarBlockTop extends Block implements SimpleWaterloggedBlock {
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!level.isClientSide()) {
-            System.out.println("Hello Top");
             BlockPos belowPos = pos.below();
             BlockState belowState = level.getBlockState(belowPos);
 

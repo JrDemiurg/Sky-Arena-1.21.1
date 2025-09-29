@@ -17,8 +17,9 @@
   },
   "criteria": {
     "difficulty_level_10": {
-      "trigger": "skyarena:difficulty_level_10",
+      "trigger": "skyarena:difficulty_level",
       "conditions": {
+        "level": 10
       }
     }
   },

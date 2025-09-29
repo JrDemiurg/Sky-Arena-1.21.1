@@ -242,7 +242,6 @@ public class AltarBlockEntity extends BlockEntity {
         stopMusic();
     }
 
-    // TODO проверить сохранение данных
     @Override
     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider registries) {
         super.saveAdditional(pTag, registries);
@@ -271,9 +270,7 @@ public class AltarBlockEntity extends BlockEntity {
         pTag.putDouble("StatMultiplierCoefficientPerBlocks", this.statMultiplierCoefficientPerBlocks);
         pTag.putDouble("LootTableCountCoefficientPerBlocks", this.lootTableCountCoefficientPerBlocks);
 
-        // TODO проверить сохранение музыки
         if (!this.recordItem.isEmpty()) {
-            // pTag.put("RecordItem", this.recordItem.save(new CompoundTag()));
             pTag.put("RecordItem", this.recordItem.save(registries));
         }
 
@@ -357,7 +354,6 @@ public class AltarBlockEntity extends BlockEntity {
         }
     }
 
-    // TODO проверить загрузку данных
     @Override
     protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider registries) {
         super.loadAdditional(pTag, registries);
@@ -386,9 +382,7 @@ public class AltarBlockEntity extends BlockEntity {
         if (pTag.contains("StatMultiplierCoefficientPerBlocks")) this.statMultiplierCoefficientPerBlocks = pTag.getDouble("StatMultiplierCoefficientPerBlocks");
         if (pTag.contains("LootTableCountCoefficientPerBlocks")) this.lootTableCountCoefficientPerBlocks = pTag.getDouble("LootTableCountCoefficientPerBlocks");
 
-        // TODO провеирить загрукзку музыки
         if (pTag.contains("RecordItem")) {
-            // this.recordItem = ItemStack.of(pTag.getCompound("RecordItem"));
             this.recordItem = ItemStack.parse(registries, pTag.getCompound("RecordItem")).orElse(ItemStack.EMPTY);
         }
 
@@ -818,7 +812,6 @@ public class AltarBlockEntity extends BlockEntity {
                         String mobId = entry.getKey();
                         int cost = entry.getValue();
 
-                        // TODO проверить как фильтруются неустановленные мобы
                         if (!BuiltInRegistries.ENTITY_TYPE.containsKey(ResourceLocation.parse(mobId))) continue;
 
                         ExpandedMobInfo info = new ExpandedMobInfo(
@@ -919,7 +912,6 @@ public class AltarBlockEntity extends BlockEntity {
         }
     }
 
-    // TODO проверить работает ли
     public void setRecordItem(ItemStack stack) {
         if (stack.get(DataComponents.JUKEBOX_PLAYABLE) != null) {
             this.recordItem = stack.copy();

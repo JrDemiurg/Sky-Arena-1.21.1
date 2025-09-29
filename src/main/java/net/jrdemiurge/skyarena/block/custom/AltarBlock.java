@@ -86,7 +86,6 @@ public class AltarBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!level.isClientSide()) {
-            System.out.println("Hello Bottom");
             use(state, level, pos, player, hand, hitResult);
         }
         return ItemInteractionResult.SUCCESS;
@@ -113,7 +112,6 @@ public class AltarBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
                 return;
             }
 
-            // TODO проверить пластинки
             if (pPlayer.getItemInHand(pHand).get(DataComponents.JUKEBOX_PLAYABLE) != null) {
                 handleRecordUse(pLevel, pPos, pPlayer, pHand, altarBlockEntity);
                 return;
@@ -210,7 +208,6 @@ public class AltarBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
                     PresetWave wave = presetWaves.get(difficultyLevel);
 
                     for (WaveMob waveMob : wave.mobs) {
-                        // TODO проверить тут что даст метод get в пресет волне если моб не будет зареган
                         EntityType<?> entityType = BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.parse(waveMob.type));
                         if (entityType == null) continue;
 
@@ -241,6 +238,7 @@ public class AltarBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
                 List<ExpandedMobInfo> availableMobs = altarBlockEntity.getAvailableMobs(altarBlockEntity.getBattleDifficultyLevel());
 
                 // TODO Сюда можно добавить сообщение что нет мобов для спавна
+                // TODO тут ещё если список пуст всё равно станет играть музыка и наступит ночь
                 if (availableMobs.isEmpty()) return;
 
                 int minMobValue = availableMobs.stream()
@@ -268,7 +266,6 @@ public class AltarBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
                     skipCount = 0;
 
                     if (remainingPoints >= mobValue) {
-                        // TODO тут тоже поменял получение моба
                         EntityType<?> entityType = BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.parse(mobInfo.mobId));
                         if (entityType == null) continue;
 
@@ -327,15 +324,7 @@ public class AltarBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
                 attackAttribute.setBaseValue(baseDamage * statMultiplier);
             }
 
-            // TODO убрал 5 арг null, также метод deprecated возможно в будущем надо будет поменять, чтобы с обновой неофорджа не перестало работать
-            /*mobEntity.finalizeSpawn(
-                    (ServerLevel) pLevel,
-                    pLevel.getCurrentDifficultyAt(mobEntity.blockPosition()),
-                    MobSpawnType.NATURAL,
-                    null
-            );*/
-
-            // TODO Проверить появляется у секелтов оружие
+            // TODO можно попробовать поменять MobSpawnType.NATURAL на что то другое чтобы мобы не спавнились спящие
             EventHooks.finalizeMobSpawn(
                     mobEntity,
                     (ServerLevel) pLevel,
@@ -349,11 +338,9 @@ public class AltarBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
             }
         }
 
-        // TODO проверить замену addFreshEntity на tryAddFreshEntityWithPassengers
         if (pLevel instanceof ServerLevel serverLevel) {
             serverLevel.tryAddFreshEntityWithPassengers(mob);
         }
-        // pLevel.addFreshEntity(mob);
         altarBlockEntity.addSummonedMob(mob);
         return true;
     }
@@ -575,7 +562,7 @@ public class AltarBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
 
         altarBlockEntity.setDifficultyLevel(pPlayer, 1);
 
-        pPlayer.getItemInHand(pHand).shrink(1);
+        pPlayer.getItemInHand(pHand).consume(1, pPlayer);
 
         pPlayer.getCooldowns().addCooldown(Items.NETHERITE_INGOT, 40);
 
@@ -609,8 +596,6 @@ public class AltarBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
         if (!altarBlockEntity.isAutoWaveRun())
             altarBlockEntity.removeAltarActivationForPlayer();
 
-        handleVictoryTriggers(altarBlockEntity, pPlayer);
-
         if (altarBlockEntity.isBattleOngoing(altarBlockEntity.getDifficultyLevel(pPlayer) + 1)) {
             pPlayer.displayClientMessage(Component.translatable("message.skyarena.victory"), true);
             altarBlockEntity.putPlayerMessageTimestamps(pPlayer);
@@ -624,6 +609,9 @@ public class AltarBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
 
         int difficultyLevel = altarBlockEntity.getBattleDifficultyLevel(); // Получаем текущий уровень сложности
 
+        if (pPlayer instanceof ServerPlayer serverPlayer) {
+            ModTriggers.DIFFICULTY_LEVEL.get().trigger(serverPlayer, difficultyLevel);
+        }
         if (difficultyLevel == 50) sendDiscordInvite(pPlayer);
 
         int keyCount = 1;
@@ -660,7 +648,6 @@ public class AltarBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
 
 
         if (pLevel instanceof ServerLevel serverLevel) {
-            // TODO проверить выдачу ключа и что будет если такой таблицы несуществует
             ResourceLocation id = ResourceLocation.tryParse(rewardLootTableId);
             if (id == null) {
                 id = ResourceLocation.parse("skyarena:battle_rewards/crimson_key");
@@ -669,13 +656,6 @@ public class AltarBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
             LootTable lootTable = serverLevel.getServer()
                     .reloadableRegistries()
                     .getLootTable(ResourceKey.create(Registries.LOOT_TABLE, id));
-
-            /*LootTable lootTable = serverLevel.getServer().getLootData().getLootTable(new ResourceLocation(rewardLootTableId));
-
-            if (lootTable == LootTable.EMPTY && !rewardLootTableId.equals("minecraft:empty")) {
-                rewardLootTableId = "skyarena:battle_rewards/crimson_key";
-                lootTable = serverLevel.getServer().getLootData().getLootTable(new ResourceLocation(rewardLootTableId));
-            }*/
 
             if (lootTable != LootTable.EMPTY) {
                 LootParams lootParams = new LootParams.Builder(serverLevel)
@@ -727,33 +707,6 @@ public class AltarBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
         player.sendSystemMessage(Component.translatable("message.skyarena.discord.line1"));
         player.sendSystemMessage(Component.translatable("message.skyarena.discord.line2"));
         player.sendSystemMessage(Component.translatable("message.skyarena.discord.line3", discord));
-    }
-
-    // TODO перенеси тригеры на систему с улосвиями с переменной в виде номера волны
-    private void handleVictoryTriggers(AltarBlockEntity altarBlockEntity, Player pPlayer) {
-        int difficultyLevel = altarBlockEntity.getDifficultyLevel(pPlayer);
-
-        /*if (pPlayer instanceof ServerPlayer serverPlayer) {
-            DifficultyLevel1.INSTANCE.trigger(serverPlayer);
-            if (difficultyLevel >= 1) {
-                DifficultyLevel1.INSTANCE.trigger(serverPlayer);
-            }
-            if (difficultyLevel >= 5) {
-                DifficultyLevel5.INSTANCE.trigger(serverPlayer);
-            }
-            if (difficultyLevel >= 10) {
-                DifficultyLevel10.INSTANCE.trigger(serverPlayer);
-            }
-            if (difficultyLevel >= 20) {
-                DifficultyLevel20.INSTANCE.trigger(serverPlayer);
-            }
-            if (difficultyLevel >= 50) {
-                DifficultyLevel50.INSTANCE.trigger(serverPlayer);
-            }
-            if (difficultyLevel >= 100) {
-                DifficultyLevel100.INSTANCE.trigger(serverPlayer);
-            }
-        }*/
     }
 
     private void setEnvironment(Level pLevel, Player pPlayer,boolean isNight, boolean isRain) {

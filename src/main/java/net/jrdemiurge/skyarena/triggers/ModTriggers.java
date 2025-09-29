@@ -8,7 +8,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
-// TODO сделать тригер зависящий от аргумента номера волны
 public class ModTriggers {
     public static final DeferredRegister<CriterionTrigger<?>> TRIGGER_TYPES =
             DeferredRegister.create(Registries.TRIGGER_TYPE, SkyArena.MOD_ID);
@@ -25,6 +24,8 @@ public class ModTriggers {
     public static final Supplier<SignalTrigger> USE_STICK =
             TRIGGER_TYPES.register("use_stick", SignalTrigger::new);
 
+    public static final Supplier<DifficultyLevelTrigger> DIFFICULTY_LEVEL =
+            TRIGGER_TYPES.register("difficulty_level", DifficultyLevelTrigger::new);
 
     public static void register(IEventBus eventBus) {
         TRIGGER_TYPES.register(eventBus);
