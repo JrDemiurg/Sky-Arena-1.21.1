@@ -8,9 +8,15 @@
     "defaultRequire": 1
   },
   "mixins": [
+    "AncientRemnantEntityMixin",
+    "EnderGuardianEntityMixin",
     "EyeOfEnderAccessor",
     "LevelMixin",
+    "MaledictusEntityMixin",
+    "NetheriteMonstrosityEntityMixin",
+    "ScyllaEntityMixin",
     "ServerBossEventMixin",
+    "TheHarbingerEntityMixin",
     "WitherBossMixin"
   ]
 }

@@ -18,7 +18,6 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
-// TODO добавить миксины на мобов
 @Mod(SkyArena.MOD_ID)
 public class SkyArena {
     public static final String MOD_ID = "skyarena";

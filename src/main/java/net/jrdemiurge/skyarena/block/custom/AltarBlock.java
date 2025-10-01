@@ -237,9 +237,12 @@ public class AltarBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
 
                 List<ExpandedMobInfo> availableMobs = altarBlockEntity.getAvailableMobs(altarBlockEntity.getBattleDifficultyLevel());
 
-                // TODO Сюда можно добавить сообщение что нет мобов для спавна
-                // TODO тут ещё если список пуст всё равно станет играть музыка и наступит ночь
-                if (availableMobs.isEmpty()) return;
+                if (availableMobs.isEmpty()) {
+                    Component message_2 = Component.translatable("message.skyarena.available_mobs_is_empty");
+                    pPlayer.displayClientMessage(message_2, true);
+                    altarBlockEntity.putPlayerMessageTimestamps(pPlayer);
+                    return;
+                }
 
                 int minMobValue = availableMobs.stream()
                         .mapToInt(mob -> mob.cost)
@@ -324,12 +327,19 @@ public class AltarBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
                 attackAttribute.setBaseValue(baseDamage * statMultiplier);
             }
 
-            // TODO можно попробовать поменять MobSpawnType.NATURAL на что то другое чтобы мобы не спавнились спящие
+            // можно поменять на MobSpawnType.EVENT
+            MobSpawnType spawnType = MobSpawnType.NATURAL;
+
+            if (mobTypeString.equals("cataclysm:scylla")
+                || mobTypeString.equals("cataclysm:netherite_monstrosity")) {
+                spawnType = MobSpawnType.COMMAND;
+            }
+
             EventHooks.finalizeMobSpawn(
                     mobEntity,
                     (ServerLevel) pLevel,
                     pLevel.getCurrentDifficultyAt(mobEntity.blockPosition()),
-                    MobSpawnType.NATURAL,
+                    spawnType,
                     null
             );
 

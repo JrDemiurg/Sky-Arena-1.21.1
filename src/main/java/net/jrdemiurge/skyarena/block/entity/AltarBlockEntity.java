@@ -29,7 +29,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.level.Level;
@@ -42,6 +41,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.*;
 
+// TODO если арена была fullProtected и в месте её спавна были блоки (к примеру от горы рядом) то блоки внутри арены не удаляться из за защиты
 public class AltarBlockEntity extends BlockEntity {
 
     private static final Map<Player, BlockPos> activeAltarBlocks = new HashMap<>();
@@ -56,9 +56,6 @@ public class AltarBlockEntity extends BlockEntity {
     private static final Map<Player, Long> playerMessageTimestamps = new HashMap<>();
     // музыка
     private ItemStack recordItem = ItemStack.EMPTY;
-    private boolean isPlayingMusic = false;
-    private long musicEndTick = 0;
-    private long musicTickCount = 0;
     private Holder<JukeboxSong> song;
     private long ticksSinceSongStarted;
     // сложность
@@ -515,16 +512,7 @@ public class AltarBlockEntity extends BlockEntity {
         }
     }
 
-    // TODO проверить что случшится если установить модовую пластинку а потом удалить мод и включить алтарь
     private void handleMusic() {
-        /*if (!isPlayingMusic || level == null || recordItem.isEmpty()) return;
-
-        if (musicTickCount >= musicEndTick) {
-            stopMusic();
-            startMusic();
-        }
-        musicTickCount++;*/
-
         if (level != null && this.song != null) {
             if (this.song.value().hasFinished(this.ticksSinceSongStarted)) {
                 stopMusic();
@@ -546,15 +534,6 @@ public class AltarBlockEntity extends BlockEntity {
                 this.setChanged(); // ???
             }
         }
-        //
-        /*if (this.level != null && !recordItem.isEmpty() && !isPlayingMusic) {
-            this.musicTickCount = this.level.getGameTime();
-            RecordItem record = (RecordItem) recordItem.getItem();
-            this.musicEndTick = this.musicTickCount + record.getLengthInTicks() + 20L;
-            this.isPlayingMusic = true;
-            this.level.levelEvent(null, 1010, this.getBlockPos(), Item.getId(recordItem.getItem()));
-            this.setChanged();
-        }*/
     }
 
     public void stopMusic() {
@@ -565,12 +544,6 @@ public class AltarBlockEntity extends BlockEntity {
             level.levelEvent(1011, this.getBlockPos(), 0);
             this.setChanged(); // ???
         }
-        //
-        /*if (this.level != null && isPlayingMusic) {
-            this.isPlayingMusic = false;
-            this.level.levelEvent(1011, this.getBlockPos(), 0);
-            this.setChanged();
-        }*/
     }
 
     private void checkPlayerLeftArena() {
